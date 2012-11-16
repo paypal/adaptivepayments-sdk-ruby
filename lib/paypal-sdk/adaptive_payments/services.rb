@@ -25,9 +25,11 @@ module PayPal::SDK
       end
       alias_method :cancel_preapproval, :CancelPreapproval
 
-      def BuildCancelPreapproval(options = {})
+      def BuildCancelPreapproval(options = {}, &block)
         klass     = CancelPreapprovalRequest
-        options.is_a?(klass) ? options : klass.new(options || {})
+        object = options.is_a?(klass) ? options : klass.new(options || {})
+        object.instance_eval(&block) if block
+        object
       end
       alias_method :build_cancel_preapproval, :BuildCancelPreapproval
 
@@ -42,9 +44,11 @@ module PayPal::SDK
       end
       alias_method :confirm_preapproval, :ConfirmPreapproval
 
-      def BuildConfirmPreapproval(options = {})
+      def BuildConfirmPreapproval(options = {}, &block)
         klass     = ConfirmPreapprovalRequest
-        options.is_a?(klass) ? options : klass.new(options || {})
+        object = options.is_a?(klass) ? options : klass.new(options || {})
+        object.instance_eval(&block) if block
+        object
       end
       alias_method :build_confirm_preapproval, :BuildConfirmPreapproval
 
@@ -59,9 +63,11 @@ module PayPal::SDK
       end
       alias_method :convert_currency, :ConvertCurrency
 
-      def BuildConvertCurrency(options = {})
+      def BuildConvertCurrency(options = {}, &block)
         klass     = ConvertCurrencyRequest
-        options.is_a?(klass) ? options : klass.new(options || {})
+        object = options.is_a?(klass) ? options : klass.new(options || {})
+        object.instance_eval(&block) if block
+        object
       end
       alias_method :build_convert_currency, :BuildConvertCurrency
 
@@ -76,9 +82,11 @@ module PayPal::SDK
       end
       alias_method :execute_payment, :ExecutePayment
 
-      def BuildExecutePayment(options = {})
+      def BuildExecutePayment(options = {}, &block)
         klass     = ExecutePaymentRequest
-        options.is_a?(klass) ? options : klass.new(options || {})
+        object = options.is_a?(klass) ? options : klass.new(options || {})
+        object.instance_eval(&block) if block
+        object
       end
       alias_method :build_execute_payment, :BuildExecutePayment
 
@@ -93,9 +101,11 @@ module PayPal::SDK
       end
       alias_method :get_allowed_funding_sources, :GetAllowedFundingSources
 
-      def BuildGetAllowedFundingSources(options = {})
+      def BuildGetAllowedFundingSources(options = {}, &block)
         klass     = GetAllowedFundingSourcesRequest
-        options.is_a?(klass) ? options : klass.new(options || {})
+        object = options.is_a?(klass) ? options : klass.new(options || {})
+        object.instance_eval(&block) if block
+        object
       end
       alias_method :build_get_allowed_funding_sources, :BuildGetAllowedFundingSources
 
@@ -110,9 +120,11 @@ module PayPal::SDK
       end
       alias_method :get_payment_options, :GetPaymentOptions
 
-      def BuildGetPaymentOptions(options = {})
+      def BuildGetPaymentOptions(options = {}, &block)
         klass     = GetPaymentOptionsRequest
-        options.is_a?(klass) ? options : klass.new(options || {})
+        object = options.is_a?(klass) ? options : klass.new(options || {})
+        object.instance_eval(&block) if block
+        object
       end
       alias_method :build_get_payment_options, :BuildGetPaymentOptions
 
@@ -127,9 +139,11 @@ module PayPal::SDK
       end
       alias_method :payment_details, :PaymentDetails
 
-      def BuildPaymentDetails(options = {})
+      def BuildPaymentDetails(options = {}, &block)
         klass     = PaymentDetailsRequest
-        options.is_a?(klass) ? options : klass.new(options || {})
+        object = options.is_a?(klass) ? options : klass.new(options || {})
+        object.instance_eval(&block) if block
+        object
       end
       alias_method :build_payment_details, :BuildPaymentDetails
 
@@ -144,9 +158,11 @@ module PayPal::SDK
       end
       alias_method :pay, :Pay
 
-      def BuildPay(options = {})
+      def BuildPay(options = {}, &block)
         klass     = PayRequest
-        options.is_a?(klass) ? options : klass.new(options || {})
+        object = options.is_a?(klass) ? options : klass.new(options || {})
+        object.instance_eval(&block) if block
+        object
       end
       alias_method :build_pay, :BuildPay
 
@@ -161,9 +177,11 @@ module PayPal::SDK
       end
       alias_method :preapproval_details, :PreapprovalDetails
 
-      def BuildPreapprovalDetails(options = {})
+      def BuildPreapprovalDetails(options = {}, &block)
         klass     = PreapprovalDetailsRequest
-        options.is_a?(klass) ? options : klass.new(options || {})
+        object = options.is_a?(klass) ? options : klass.new(options || {})
+        object.instance_eval(&block) if block
+        object
       end
       alias_method :build_preapproval_details, :BuildPreapprovalDetails
 
@@ -178,9 +196,11 @@ module PayPal::SDK
       end
       alias_method :preapproval, :Preapproval
 
-      def BuildPreapproval(options = {})
+      def BuildPreapproval(options = {}, &block)
         klass     = PreapprovalRequest
-        options.is_a?(klass) ? options : klass.new(options || {})
+        object = options.is_a?(klass) ? options : klass.new(options || {})
+        object.instance_eval(&block) if block
+        object
       end
       alias_method :build_preapproval, :BuildPreapproval
 
@@ -195,9 +215,11 @@ module PayPal::SDK
       end
       alias_method :refund, :Refund
 
-      def BuildRefund(options = {})
+      def BuildRefund(options = {}, &block)
         klass     = RefundRequest
-        options.is_a?(klass) ? options : klass.new(options || {})
+        object = options.is_a?(klass) ? options : klass.new(options || {})
+        object.instance_eval(&block) if block
+        object
       end
       alias_method :build_refund, :BuildRefund
 
@@ -212,9 +234,11 @@ module PayPal::SDK
       end
       alias_method :set_payment_options, :SetPaymentOptions
 
-      def BuildSetPaymentOptions(options = {})
+      def BuildSetPaymentOptions(options = {}, &block)
         klass     = SetPaymentOptionsRequest
-        options.is_a?(klass) ? options : klass.new(options || {})
+        object = options.is_a?(klass) ? options : klass.new(options || {})
+        object.instance_eval(&block) if block
+        object
       end
       alias_method :build_set_payment_options, :BuildSetPaymentOptions
 
@@ -229,9 +253,11 @@ module PayPal::SDK
       end
       alias_method :get_funding_plans, :GetFundingPlans
 
-      def BuildGetFundingPlans(options = {})
+      def BuildGetFundingPlans(options = {}, &block)
         klass     = GetFundingPlansRequest
-        options.is_a?(klass) ? options : klass.new(options || {})
+        object = options.is_a?(klass) ? options : klass.new(options || {})
+        object.instance_eval(&block) if block
+        object
       end
       alias_method :build_get_funding_plans, :BuildGetFundingPlans
 
@@ -246,9 +272,11 @@ module PayPal::SDK
       end
       alias_method :get_available_shipping_addresses, :GetAvailableShippingAddresses
 
-      def BuildGetAvailableShippingAddresses(options = {})
+      def BuildGetAvailableShippingAddresses(options = {}, &block)
         klass     = GetAvailableShippingAddressesRequest
-        options.is_a?(klass) ? options : klass.new(options || {})
+        object = options.is_a?(klass) ? options : klass.new(options || {})
+        object.instance_eval(&block) if block
+        object
       end
       alias_method :build_get_available_shipping_addresses, :BuildGetAvailableShippingAddresses
 
@@ -263,9 +291,11 @@ module PayPal::SDK
       end
       alias_method :get_shipping_addresses, :GetShippingAddresses
 
-      def BuildGetShippingAddresses(options = {})
+      def BuildGetShippingAddresses(options = {}, &block)
         klass     = GetShippingAddressesRequest
-        options.is_a?(klass) ? options : klass.new(options || {})
+        object = options.is_a?(klass) ? options : klass.new(options || {})
+        object.instance_eval(&block) if block
+        object
       end
       alias_method :build_get_shipping_addresses, :BuildGetShippingAddresses
 
@@ -280,9 +310,11 @@ module PayPal::SDK
       end
       alias_method :get_user_limits, :GetUserLimits
 
-      def BuildGetUserLimits(options = {})
+      def BuildGetUserLimits(options = {}, &block)
         klass     = GetUserLimitsRequest
-        options.is_a?(klass) ? options : klass.new(options || {})
+        object = options.is_a?(klass) ? options : klass.new(options || {})
+        object.instance_eval(&block) if block
+        object
       end
       alias_method :build_get_user_limits, :BuildGetUserLimits
 

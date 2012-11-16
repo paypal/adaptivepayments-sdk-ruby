@@ -23,4 +23,17 @@ describe "ConvertCurrency" do
     response.response_envelope.ack.should eql "Success"
   end
 
+  it "with block" do
+    convert_currency_request = @client.build_convert_currency do
+      baseAmountList do
+        currency[0].code   = "USD"
+        currency[0].amount = 2.0
+      end
+      convertToCurrencyList.currencyCode = [ "GBP" ]
+    end
+
+    response = @client.convert_currency(convert_currency_request)
+    response.response_envelope.ack.should eql "Success"
+  end
+
 end
