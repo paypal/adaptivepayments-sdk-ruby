@@ -16,7 +16,39 @@ Or install it yourself as:
 
     $ gem install paypal-sdk-adaptivepayments
 
-## Create API object and Configuration
+## Configuration
+
+For Rails application:
+
+    rails g paypal:sdk:install
+
+For other ruby application, create a configuration file(`config/paypal.yml`):
+
+    development: &default
+      username: jb-us-seller_api1.paypal.com
+      password: WX4WTU3S8MY44S7F
+      signature: AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy
+      app_id: APP-80W284485P519543T
+      http_timeout: 30
+      mode: sandbox
+      # # with certificate
+      # cert_path: "config/cert_key.pem"
+      # # with token authentication
+      # token: ESTy2hio5WJQo1iixkH29I53RJxaS0Gvno1A6.YQXZgktxbY4I2Tdg
+      # token_secret: ZKPhUYuwJwYsfWdzorozWO2U9pI
+      # # with Proxy
+      # http_proxy: http://proxy-ipaddress:3129/
+    test:
+      <<: *default
+    production:
+      <<: *default
+      mode: live
+
+Load Configurations from specified file:
+
+    PayPal::SDK::Core::Config.load('config/paypal.yml',  ENV['RACK_ENV'] || 'development')
+
+## Create API object
 
 Create API object:
 
