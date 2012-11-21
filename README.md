@@ -118,24 +118,43 @@ To get response status:
 
 ## Example
 
-    require 'paypal-sdk-adaptivepayments'
-    @api = PayPal::SDK::AdaptivePayments::API.new
+```ruby
+require 'paypal-sdk-adaptivepayments'
+@api = PayPal::SDK::AdaptivePayments::API.new
 
-    # Build request object
-    @pay_request = @api.build_pay()
-    @pay_request.actionType   = "PAY"
-    @pay_request.cancelUrl    = "http://localhost:3000/adaptive_payments/pay"
-    @pay_request.currencyCode = "USD"
-    @pay_request.feesPayer    = "SENDER"
-    @pay_request.receiverList.receiver[0].amount = 1.0
-    @pay_request.receiverList.receiver[0].email  = "platfo_1255612361_per@gmail.com"
-    @pay_request.returnUrl    = "http://localhost:3000/adaptive_payments/pay"
-    @pay_request.fundingConstraint.allowedFundingType.fundingTypeInfo = []
-    @pay_request.sender.email = "platfo_1255077030_biz@gmail.com"
+# Build request object
+@pay_request = @api.build_pay()
+@pay_request.actionType   = "PAY"
+@pay_request.cancelUrl    = "http://localhost:3000/adaptive_payments/pay"
+@pay_request.currencyCode = "USD"
+@pay_request.feesPayer    = "SENDER"
+@pay_request.receiverList.receiver[0].amount = 1.0
+@pay_request.receiverList.receiver[0].email  = "platfo_1255612361_per@gmail.com"
+@pay_request.returnUrl    = "http://localhost:3000/adaptive_payments/pay"
+@pay_request.fundingConstraint.allowedFundingType.fundingTypeInfo = []
+@pay_request.sender.email = "platfo_1255077030_biz@gmail.com"
 
-    # Make API call & get response
-    @pay_response = @api.pay(@pay_request)
+# Make API call & get response
+@pay_response = @api.pay(@pay_request)
 
-    # Access response
-    @pay_response.responseEnvelope.ack
+# Access response
+@pay_response.responseEnvelope.ack
+```
+
+## For Samples
+
+Add following line in rails `Gemfile`:
+
+    gem 'paypal-sdk-adaptivepayments'
+    gem 'adaptive_payments_samples', :git => "https://github.com/paypal/adaptivepayments-ruby.git", :group => :development
+
+Configure routes(`config/routes.rb`):
+
+    mount AdaptivePaymentsSamples::Engine => "/samples" if Rails.env.development?
+
+To get default paypal configuration execute:
+
+    rails g paypal:sdk:install
+
+Run `rails server` and check the samples.
 

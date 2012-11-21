@@ -1,0 +1,14 @@
+= api_form_for @execute_payment, :url => adaptive_payments_path(:execute_payment) do |f|
+
+  .row
+    .span5
+      %legend Execute payment request
+      = f.input :payKey
+      = f.input :actionType
+      = f.input :fundingPlanId
+
+  .form-actions
+    = f.submit "Submit", :class => "btn btn-primary", :data => { :disable_with => "Processing.." }
+
+- if @execute_payment_response
+  = render 'api_response', :request => @execute_payment, :response => @execute_payment_response

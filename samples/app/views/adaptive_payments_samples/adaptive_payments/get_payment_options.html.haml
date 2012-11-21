@@ -1,0 +1,12 @@
+= api_form_for @get_payment_options, :url => adaptive_payments_path(:get_payment_options) do |f|
+
+  .row
+    .span5
+      %legend Get Payment Options
+      = f.input :payKey
+
+  .form-actions
+    = f.submit "Submit", :class => "btn btn-primary", :data => { :disable_with => "Processing.." }
+
+- if @get_payment_options_response
+  = render 'api_response', :request => @get_payment_options, :response => @get_payment_options_response

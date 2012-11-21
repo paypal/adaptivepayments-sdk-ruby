@@ -1,0 +1,16 @@
+require 'paypal-sdk-<%= service_name.gsub("_", "") %>'
+@api = PayPal::SDK::<%= service_name.camelize %>::API.new
+
+# Build request object
+@<%= service_action %>_request = @api.build_<%= service_action %>()
+<% get_dotted_hash(request_hash).each do |key, value| -%>
+@<%= service_action %>_request.<%= key %> = <%= value.to_json.html_safe %>
+<% end -%>
+
+# Make API call & get response
+@<%= service_action %>_response = @api.<%= service_action %>(@<%= service_action %>_request)
+
+# Access Response
+<% response_hash.each do |key, value| -%>
+@<%= service_action %>_response.<%= key %>
+<% end -%>

@@ -1,0 +1,24 @@
+= api_form_for @convert_currency, :url => adaptive_payments_path(:convert_currency) do |f|
+
+  .row
+    .span5
+      %legend From Currency
+      = f.fields_for :baseAmountList do |base|
+        = base.fields_for :currency do |cur|
+          = cur.input :code
+          = cur.input :amount
+
+    .span5
+      %legend To Currency
+      = f.fields_for :convertToCurrencyList do |base|
+        .control-group
+          %label.control-label Code
+          - base.object.currency_code.each do |code|
+            .controls
+              = text_field_tag "#{base.object_name}[currencyCode][]", code, :class => "input-small"
+
+  .form-actions
+    = f.submit "Submit", :class => "btn btn-primary", :data => { :disable_with => "Processing" }
+
+- if @convert_currency_response
+  = render 'api_response', :request => @convert_currency, :response => @convert_currency_response

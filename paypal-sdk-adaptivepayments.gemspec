@@ -12,10 +12,10 @@ Gem::Specification.new do |gem|
   gem.summary       = %q{AdaptivePayments SDK}
   gem.homepage      = "https://www.x.com/"
 
-  gem.files         = Dir["**/*"]
+  gem.files         = Dir["{bin,spec,lib}/**/*"] + ["Rakefile", "README.md", "Gemfile"]
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_dependency('paypal-sdk-core')
+  gem.add_dependency('paypal-sdk-core', '~> 0.1.0')
 end

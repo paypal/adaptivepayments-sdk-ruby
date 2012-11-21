@@ -1,0 +1,10 @@
+%legend Autherization
+.control-group.string.optional
+  = label_tag :token, "Token", :class => "string optional control-label"
+  .controls
+    = text_field_tag :token, params[:token] || @api.config.token
+
+.control-group.string.optional
+  = label_tag :token_secret, "Token Secret", :class => "string optional control-label"
+  .controls
+    = text_field_tag :token_secret, params[:token_secret] || @api.config.token_secret

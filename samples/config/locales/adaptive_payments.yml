@@ -1,0 +1,53 @@
+en:
+  adaptive_payments:
+    pay:
+      actionType: PAY
+      cancelUrl: http://localhost:3000/adaptive_payments/pay
+      returnUrl: http://localhost:3000/adaptive_payments/pay
+      currencyCode: USD
+      feesPayer: SENDER
+      receiver_list:
+        receiver:
+          email: platfo_1255612361_per@gmail.com
+          amount: 1.0
+          primary: false
+      reverseAllParallelPaymentsOnError: false
+      sender:
+        email: platfo_1255077030_biz@gmail.com
+    preapproval:
+      cancelUrl: http://localhost:3000/adaptive_payments/preapproval
+      returnUrl: http://localhost:3000/adaptive_payments/preapproval
+      currencyCode: USD
+      startingDate: "2015-10-10"
+    refund:
+      currencyCode: USD
+      receiver_list:
+        receiver:
+          amount: 1.0
+          email: platfo_1255612361_per@gmail.com
+    convert_currency:
+      baseAmountList:
+        currency:
+        - code: USD
+          amount: 2.0
+      convertToCurrencyList:
+        currencyCode:
+        - GBP
+    payment_details:
+      pay_key: AP-5S482348KH512131U
+    preapproval_details:
+      preapproval_key: PA-2T305990ET0354039
+    cancel_preapproval:
+      preapproval_key: PA-2T305990ET0354039
+    confirm_preapproval:
+      preapproval_key: PA-2T305990ET0354039
+    set_payment_options:
+      display_options: {}
+      initiating_entity:
+        institution_customer: {}
+      sender_options: {}
+      receiver_options:
+        invoice_data:
+          item: {}
+    get_payment_options:
+      pay_key: AP-5S482348KH512131U

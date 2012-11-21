@@ -1,0 +1,26 @@
+= api_form_for @refund, :url => adaptive_payments_path(:action => :refund) do |f|
+
+  .row
+    .span5
+      %legend Refund request
+      = f.input :currencyCode
+      = f.input :payKey
+      = f.input :transactionId
+      = f.input :trackingId
+
+    .span5
+      %legend Reciver
+      = f.fields_for :receiverList do |list|
+        = list.fields_for :receiver do |receiver|
+          = receiver.input :amount
+          = receiver.input :email
+          = receiver.fields_for :phone do |phone|
+            = render 'phone', :phone => phone
+
+
+  .form-actions
+    = f.submit "Submit", :class => "btn btn-primary", :data => { :disable_with => "Processing.." }
+
+- if @refund_response
+  = render 'api_response', :request => @refund, :response => @refund_response
+

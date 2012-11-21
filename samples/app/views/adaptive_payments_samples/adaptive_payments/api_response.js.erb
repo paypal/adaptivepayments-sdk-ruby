@@ -1,0 +1,8 @@
+var response_data = <%= render("api_response", :request => @api, :response => @api_response).to_json.html_safe %>;
+
+if($('#response').length == 1){
+  $('#response').replaceWith(response_data);
+} else {
+  $('.span10').append(response_data);
+}
+

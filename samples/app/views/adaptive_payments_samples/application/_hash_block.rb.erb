@@ -1,0 +1,15 @@
+<% hash.each do |key, value| -%>
+  <% if value.is_a? Hash -%>
+<%= space %><%= key %> do
+<%= render "hash_block.rb", :space => space + "  ", :hash => value %>
+<%= space %>end
+  <% elsif value.is_a? Array and value[0].is_a? Hash -%>
+    <% value.each_with_index do |array_value, index| -%>
+<%= space %><%= key %>[<%= index %>] do
+<%= render "hash_block.rb", :space => space + "  ", :hash => array_value %>
+<%= space %>end
+    <% end -%>
+  <% else -%>
+<%= space %>self.<%= key %> = <%= value.to_json.html_safe %>
+  <% end -%>
+<% end -%>

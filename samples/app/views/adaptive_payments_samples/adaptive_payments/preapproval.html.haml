@@ -1,0 +1,35 @@
+= api_form_for @preapproval, :url => adaptive_payments_path(:preapproval) do |f|
+
+  .row
+    .span5
+      %legend Preapproval request
+      =# f.input :clientDetails, ClientDetailsType
+      = f.input :cancelUrl
+      = f.input :returnUrl
+      = f.input :currencyCode
+      = f.input :dateOfMonth
+      = f.input :dayOfWeek,     :as => :select, :collection => PayPal::SDK::AdaptivePayments::API::DayOfWeek.options
+      = f.input :maxAmountPerPayment
+      = f.input :maxNumberOfPayments
+      = f.input :maxNumberOfPaymentsPerPeriod
+      = f.input :maxTotalAmountOfAllPayments
+    .span5
+      %legend -
+      = f.input :startingDate
+      = f.input :endingDate # DateTime
+      = f.input :paymentPeriod,  :as => :select, :collection => [ "NO_PERIOD_SPECIFIED", "DAILY",
+                     "WEEKLY", "BIWEEKLY", "SEMIMONTHLY", "MONTHLY", "ANNUALLY" ]
+      = f.input :memo
+      = f.input :ipnNotificationUrl
+      = f.input :senderEmail
+      = f.input :pinType,    :as => :select, :collection => [ "NOT_REQUIRED", "REQUIRED" ]
+      = f.input :feesPayer,  :as => :select, :collection => [ "EACHRECEIVER", "PRIMARYRECEIVER", "SENDER", "SECONDARYONLY" ]
+      = f.input :displayMaxTotalAmount, :as => :boolean
+
+
+  .form-actions
+    = f.submit "Submit", :class => "btn btn-primary", :data => { :disable_with => "Processing.." }
+
+- if @preapproval_response
+  = render 'api_response', :request => @preapproval, :response => @preapproval_response
+

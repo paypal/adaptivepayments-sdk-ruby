@@ -1,0 +1,12 @@
+= api_form_for @preapproval_details, :url => adaptive_payments_path(:preapproval_details) do |f|
+
+  .row
+    .span5
+      %legend Preapproval details request
+      = f.input :preapprovalKey
+
+  .form-actions
+    = f.submit "Submit", :class => "btn btn-primary", :data => { :disable_with => "Processing.." }
+
+- if @preapproval_details_response
+  = render 'api_response', :request => @preapproval_details, :response => @preapproval_details_response

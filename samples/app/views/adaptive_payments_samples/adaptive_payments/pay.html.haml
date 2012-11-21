@@ -1,0 +1,49 @@
+= api_form_for @pay, :url => adaptive_payments_path(:action => :pay) do |f|
+
+  .row
+    .span5
+      %legend Pay request
+      = f.input :actionType, :as => :select, :collection => [ "PAY", "CREATE", "PAY_PRIMARY" ]
+      = f.input :cancelUrl
+      = f.input :returnUrl
+      = f.association :fundingConstraint do |fc|
+        = fc.association :allowedFundingType do |aft| # Array
+          = aft.association :fundingTypeInfo do |fti|
+            = fti.input :fundingType, :as => :select, :collection => [ "ECHECK", "BALANCE", "CREDITCARD" ]
+      = f.input :currencyCode
+      = f.input :feesPayer,  :as => :select, :collection => [ "SENDER", "EACHRECIVER", "PRIMARYRECIVER", "SECONDARYONLY"]
+      = f.input :ipnNotificationUrl
+      = f.input :memo
+      = f.input :pin
+      = f.input :preapprovalKey
+      = f.input :reverseAllParallelPaymentsOnError, :as => :boolean
+      = f.input :senderEmail
+      = f.input :trackingId
+
+    .span5
+      %legend Receiver
+      = f.fields_for :receiverList do |list|
+        = list.fields_for :receiver do |receiver|
+          = receiver.input :amount
+          = receiver.input :email
+          = receiver.fields_for :phone do |phone|
+            = render 'phone', :phone => phone
+          = receiver.input :primary, :as => :boolean
+          = receiver.input :invoiceId
+          = receiver.input :paymentType, :as => :select, :collection => [ "GOODS", "SERVICE", "PERSONAL", "CASHADVANCE", "DIGITALGOODS" ]
+          = receiver.input :paymentSubType
+
+      %legend Sender
+      = f.fields_for :sender do |sender|
+        = sender.input :useCredentials, :as => :boolean
+        = sender.input :email
+        = sender.fields_for :phone do |phone|
+          = render 'phone', :phone => phone
+
+
+  .form-actions
+    = f.submit "Submit", :class => "btn btn-primary", :data => { :disable_with => "Processing.." }
+
+- if @pay_response
+  = render 'api_response', :request => @pay, :response => @pay_response
+

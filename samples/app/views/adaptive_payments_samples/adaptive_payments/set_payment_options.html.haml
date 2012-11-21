@@ -1,0 +1,40 @@
+= api_form_for @set_payment_options, :url => adaptive_payments_path(:set_payment_options) do |f|
+
+  .row
+    .span5
+      %legend Set payment options request
+      = f.input :payKey
+      = f.association :initiatingEntity do |ie|
+        = ie.association :institutionCustomer do |ic|
+          = ic.input :institutionId
+      %legend Display options
+      = f.association :displayOptions do |display_opt|
+        = display_opt.input :emailHeaderImageUrl
+        = display_opt.input :emailMarketingImageUrl
+        = display_opt.input :headerImageUrl
+        = display_opt.input :businessName
+      = f.input :shippingAddressId
+    .span5
+      %legend Sending Option
+      = f.association :senderOptions do |sender_opt|
+        = sender_opt.input :requireShippingAddressSelection, :as => :boolean
+        = sender_opt.input :referrerCode
+      %legend Receiver Option
+      = f.association :receiverOptions do |receiver_opt|
+        = receiver_opt.input :description
+        = receiver_opt.input :customId
+        = receiver_opt.association :invoiceData do |invoice|
+          = invoice.association :item do |item|
+            = item.input :name
+            = item.input :identifier
+            = item.input :price
+            = item.input :itemPrice
+            = item.input :itemCount
+          = invoice.input :totalTax
+          = invoice.input :totalShipping
+
+  .form-actions
+    = f.submit "Submit", :class => "btn btn-primary", :data => { :disable_with => "Processing.." }
+
+- if @set_payment_options_response
+  = render 'api_response', :request => @set_payment_options, :response => @set_payment_options_response
