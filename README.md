@@ -141,7 +141,7 @@ require 'paypal-sdk-adaptivepayments'
 @pay_response.responseEnvelope.ack
 ```
 
-## For Samples
+## Samples
 
 Add following line in rails `Gemfile`:
 
