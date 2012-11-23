@@ -31,6 +31,7 @@ For other ruby application, create a configuration file(`config/paypal.yml`):
       app_id: APP-80W284485P519543T
       http_timeout: 30
       mode: sandbox
+      sandbox_email_address: Platform.sdk.seller@gmail.com
       # # with certificate
       # cert_path: "config/cert_key.pem"
       # # with token authentication
@@ -38,6 +39,8 @@ For other ruby application, create a configuration file(`config/paypal.yml`):
       # token_secret: ZKPhUYuwJwYsfWdzorozWO2U9pI
       # # with Proxy
       # http_proxy: http://proxy-ipaddress:3129/
+      # # with device ip address
+      # device_ipaddress: "127.0.0.1"
     test:
       <<: *default
     production:
