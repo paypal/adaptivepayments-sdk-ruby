@@ -10,7 +10,7 @@ module PayPal
           super(SERVICE_NAME, environment, options)
         end
 
-        ADAPTIVE_PAYMENTS_HTTP_HEADER = { "X-PAYPAL-REQUEST-SOURCE" => "adaptivepayments-ruby-#{VERSION}" }
+        ADAPTIVE_PAYMENTS_HTTP_HEADER = { "X-PAYPAL-REQUEST-SOURCE" => "adaptivepayments-ruby-sdk-#{VERSION}" }
         def default_http_header
           super.merge(ADAPTIVE_PAYMENTS_HTTP_HEADER)
         end

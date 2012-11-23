@@ -4,19 +4,15 @@ test: &default
   signature: AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy
   app_id: APP-80W284485P519543T
   http_timeout: 30
-  http_retry: 5
-  http_trust: false
   mode: sandbox
-  redirect_url: "https://www.sandbox.paypal.com/webscr&cmd="
-  dev_central_url: "https://developer.paypal.com"
 development:
   <<: *default
-  
+
 with_certificate:
   <<: *default
   username: platfo_1255170694_biz_api1.gmail.com
   password: 2DPPKUPKB7DQLXNR
-  signature: 
+  signature:
   cert_path: "spec/config/cert_key.pem"
   app_id: APP-80W284485P519543T
   soap_end_point: "https://api.sandbox.paypal.com/2.0/"
