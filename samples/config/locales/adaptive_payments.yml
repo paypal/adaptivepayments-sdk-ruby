@@ -4,6 +4,9 @@ en:
       actionType: PAY
       cancelUrl: http://localhost:3000/adaptive_payments/pay
       returnUrl: http://localhost:3000/adaptive_payments/pay
+      fundingConstraint:
+        allowedFundingType:
+          fundingTypeInfo: {}
       currencyCode: USD
       feesPayer: SENDER
       receiver_list:
