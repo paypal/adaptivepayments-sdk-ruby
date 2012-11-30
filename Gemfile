@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'paypal-sdk-core', :git => "https://github.com/paypal/sdk-core.git", :branch => "ruby-sdk"
+gem 'paypal-sdk-core', :git => "https://github.com/paypal/sdk-core-ruby.git"
 
 if Dir.exist? File.expand_path('../samples', __FILE__)
   gem 'adaptive_payments_samples', :path => 'samples', :require => false

@@ -149,7 +149,7 @@ require 'paypal-sdk-adaptivepayments'
 Add following line in rails `Gemfile`:
 
     gem 'paypal-sdk-adaptivepayments'
-    gem 'adaptive_payments_samples', :git => "https://github.com/paypal/adaptivepayments-ruby.git", :group => :development
+    gem 'adaptive_payments_samples', :git => "https://github.com/paypal/adaptivepayments-sdk-ruby.git", :group => :development
 
 Configure routes(`config/routes.rb`):
 
