@@ -18,4 +18,5 @@ end
 RSpec.configure do |config|
   # config.use_transactional_fixtures = true
   config.include Capybara::DSL
+  config.include CheckSample
 end
