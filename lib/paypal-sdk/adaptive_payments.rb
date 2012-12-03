@@ -1,3 +1,5 @@
+require 'paypal-sdk-core'
+
 module PayPal
   module SDK
     module AdaptivePayments
