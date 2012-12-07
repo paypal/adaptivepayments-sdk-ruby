@@ -6,8 +6,8 @@ require 'paypal-sdk/adaptive_payments/version'
 Gem::Specification.new do |gem|
   gem.name          = "paypal-sdk-adaptivepayments"
   gem.version       = PayPal::SDK::AdaptivePayments::VERSION
-  gem.authors       = ["siddick"]
-  gem.email         = ["mebramsha@paypal.com"]
+  gem.authors       = ["PayPal"]
+  gem.email         = ["DL-PP-Platform-Ruby-SDK@paypal.com"]
   gem.description   = %q{AdaptivePayments SDK}
   gem.summary       = %q{AdaptivePayments SDK}
   gem.homepage      = "https://www.x.com/"
