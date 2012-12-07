@@ -8,6 +8,16 @@ module AdaptivePaymentsSamples
       redirect_to :action => :pay
     end
 
+    def ipn_notify
+      if PayPal::SDK::Core::IPN.verify?(request.raw_post)
+        logger.info("IPN message: VERIFIED")
+        render :text => "VERIFIED"
+      else
+        logger.info("IPN message: INVALID")
+        render :text => "INVALID"
+      end
+    end
+
     def cancel_preapproval
       @cancel_preapproval = api.build_cancel_preapproval(params[:CancelPreapprovalRequest] || default_api_value)
       @cancel_preapproval_response = api.cancel_preapproval(@cancel_preapproval) if request.post?
@@ -45,6 +55,7 @@ module AdaptivePaymentsSamples
 
     def pay
       @pay = api.build_pay(params[:PayRequest] || default_api_value)
+      @pay.ipnNotificationUrl ||= ipn_notify_url
       @pay_response = api.pay(@pay) if request.post?
     end
 
@@ -55,6 +66,7 @@ module AdaptivePaymentsSamples
 
     def preapproval
       @preapproval = api.build_preapproval(params[:PreapprovalRequest] || default_api_value)
+      @preapproval.ipnNotificationUrl ||= ipn_notify_url
       @preapproval_response = api.preapproval(@preapproval) if request.post?
     end
 
