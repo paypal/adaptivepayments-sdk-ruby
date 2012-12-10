@@ -15,6 +15,11 @@ if ENV["SELENIUM"]
   Capybara.default_driver = :selenium
 end
 
+if ENV["APP_HOST"]
+  Capybara.app_host = ENV["APP_HOST"]
+  Capybara.run_server = false
+end
+
 RSpec.configure do |config|
   # config.use_transactional_fixtures = true
   config.include Capybara::DSL
