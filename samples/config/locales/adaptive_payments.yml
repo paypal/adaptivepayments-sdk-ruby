@@ -2,8 +2,6 @@ en:
   adaptive_payments:
     pay:
       actionType: PAY
-      cancelUrl: http://localhost:3000/adaptive_payments/pay
-      returnUrl: http://localhost:3000/adaptive_payments/pay
       fundingConstraint:
         allowedFundingType:
           fundingTypeInfo: {}
@@ -18,8 +16,6 @@ en:
       sender:
         email: platfo_1255077030_biz@gmail.com
     preapproval:
-      cancelUrl: http://localhost:3000/adaptive_payments/preapproval
-      returnUrl: http://localhost:3000/adaptive_payments/preapproval
       currencyCode: USD
       startingDate: "2015-10-10"
     refund:

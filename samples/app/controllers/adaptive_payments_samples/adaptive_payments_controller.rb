@@ -45,6 +45,8 @@ module AdaptivePaymentsSamples
 
     def pay
       @pay = api.build_pay(params[:PayRequest] || default_api_value)
+      @pay.returnUrl ||= adaptive_payments_url(:pay)
+      @pay.cancelUrl ||= adaptive_payments_url(:pay)
       @pay_response = api.pay(@pay) if request.post?
     end
 
@@ -55,6 +57,8 @@ module AdaptivePaymentsSamples
 
     def preapproval
       @preapproval = api.build_preapproval(params[:PreapprovalRequest] || default_api_value)
+      @preapproval.returnUrl ||= adaptive_payments_url(:preapproval)
+      @preapproval.cancelUrl ||= adaptive_payments_url(:preapproval)
       @preapproval_response = api.preapproval(@preapproval) if request.post?
     end
 
