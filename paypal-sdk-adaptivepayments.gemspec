@@ -7,7 +7,7 @@ Gem::Specification.new do |gem|
   gem.name          = "paypal-sdk-adaptivepayments"
   gem.version       = PayPal::SDK::AdaptivePayments::VERSION
   gem.authors       = ["PayPal"]
-  gem.email         = ["DL-PP-Platform-Ruby-SDK@paypal.com"]
+  gem.email         = ["DL-PP-Platform-Ruby-SDK@ebay.com"]
   gem.description   = %q{AdaptivePayments SDK}
   gem.summary       = %q{AdaptivePayments SDK}
   gem.homepage      = "https://www.x.com/"
