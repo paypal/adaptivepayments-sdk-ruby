@@ -1,4 +1,4 @@
-# AdaptivePayments[ Work in progress !! ]
+# AdaptivePayments
 
 SDK for AdaptivePayments.
 
