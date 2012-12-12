@@ -9,7 +9,7 @@ module AdaptivePaymentsSamples
     end
 
     def ipn_notify
-      if PayPal::SDK::Core::IPN.verify?(request.raw_post)
+      if PayPal::SDK::Core::IPN.valid?(request.raw_post)
         logger.info("IPN message: VERIFIED")
         render :text => "VERIFIED"
       else
