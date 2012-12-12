@@ -32,4 +32,11 @@
 
 - if @preapproval_response
   = render 'api_response', :request => @preapproval, :response => @preapproval_response
+  - if @preapproval_response.responseEnvelope.ack == "Success"
+    - if @api.config.mode == "live"
+      = link_to "Redirect URL to Complete Preapproval Authorization",
+        "https://www.paypal.com/webscr&cmd=_ap-preapproval&preapprovalkey=#{@preapproval_response.preapprovalKey}"
+    - else
+      = link_to "Redirect URL to Complete Preapproval Authorization",
+        "https://www.sandbox.paypal.com/webscr&cmd=_ap-preapproval&preapprovalkey=#{@preapproval_response.preapprovalKey}"
 
