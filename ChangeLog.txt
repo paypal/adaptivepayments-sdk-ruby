@@ -1,3 +1,9 @@
+Version 1.96.2 - December 20, 2012
+ 
+	- Updated summary and description
+	
+You can see source code of this release in github under https://github.com/paypal/adaptivepayments-sdk-ruby/tree/v1.96.2
+--------------------------------------------------------------------------------------------------
 Version 1.96.1 - December 14, 2012
  
 	- Added support for Instant Payment Notification (Refer IPN-README.md for more details)
