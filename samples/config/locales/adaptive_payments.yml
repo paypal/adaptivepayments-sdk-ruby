@@ -13,8 +13,6 @@ en:
           amount: 1.0
           primary: false
       reverseAllParallelPaymentsOnError: false
-      sender:
-        email: platfo_1255077030_biz@gmail.com
     preapproval:
       currencyCode: USD
       startingDate: "2015-10-10"
