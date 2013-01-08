@@ -2,7 +2,11 @@ require "bundler/gem_tasks"
 
 desc "Run tests"
 task :rspec do
-  cmd = "bundle exec rspec && cd samples && bundle exec rspec"
+  if RUBY_VERSION >= "1.9.3"
+    cmd = "bundle exec rspec && cd samples && bundle exec rspec"
+  else
+    cmd = "bundle exec rspec"
+  end
   system(cmd) || raise("#{cmd} failed")
 end
 
