@@ -123,7 +123,9 @@ To get response status:
 
 ```ruby
 require 'paypal-sdk-adaptivepayments'
-@api = PayPal::SDK::AdaptivePayments::API.new
+@api = PayPal::SDK::AdaptivePayments::API.new( :app_id => "APP-80W284485P519543T", 
+  :username => "jb-us-seller_api1.paypal.com", :password => "WX4WTU3S8MY44S7F",
+  :signature => "AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy" )
 
 # Build request object
 @pay_request = @api.build_pay()
@@ -134,8 +136,6 @@ require 'paypal-sdk-adaptivepayments'
 @pay_request.receiverList.receiver[0].amount = 1.0
 @pay_request.receiverList.receiver[0].email  = "platfo_1255612361_per@gmail.com"
 @pay_request.returnUrl    = "http://localhost:3000/adaptive_payments/pay"
-@pay_request.fundingConstraint.allowedFundingType.fundingTypeInfo = []
-@pay_request.sender.email = "platfo_1255077030_biz@gmail.com"
 
 # Make API call & get response
 @pay_response = @api.pay(@pay_request)
