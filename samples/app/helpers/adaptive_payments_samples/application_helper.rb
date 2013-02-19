@@ -43,6 +43,28 @@ module AdaptivePaymentsSamples
       values
     end
 
+    def format_hash(hash)
+      entries = hash.map do |key, value|
+        "#{key.to_sym.inspect} => " +
+          if value.is_a? Hash and value.size > 0
+            format_hash(value)
+          elsif value.is_a? Array and value[0].is_a? Hash
+            "[" + value.map{|v| format_hash(v) }.join(",") + "]"
+          else
+            value.to_json
+          end
+      end
+      indent_hash_entries(entries)
+    end
+
+    def indent_hash_entries(entries)
+      if entries.size > 0
+        "{\n" + entries.join(",\n").gsub(/^/, "  ") + " }"
+      else
+        "{}"
+      end
+    end
+
     def api_class_name(klass)
       klass.name.gsub(/^.*::/, "")
     end
