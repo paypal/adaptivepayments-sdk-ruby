@@ -139,7 +139,7 @@ require 'paypal-sdk-adaptivepayments'
   :returnUrl => "http://localhost:3000/samples/adaptive_payments/pay" })
 
 # Make API call & get response
-@pay_response = @api.pay(@pay_request)
+@pay_response = @api.pay(@pay)
 
 # Access response
 @pay_response.responseEnvelope.ack
