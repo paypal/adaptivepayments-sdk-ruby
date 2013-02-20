@@ -126,16 +126,17 @@ require 'paypal-sdk-adaptivepayments'
 @api = PayPal::SDK::AdaptivePayments::API.new
 
 # Build request object
-@pay_request = @api.build_pay()
-@pay_request.actionType   = "PAY"
-@pay_request.cancelUrl    = "http://localhost:3000/adaptive_payments/pay"
-@pay_request.currencyCode = "USD"
-@pay_request.feesPayer    = "SENDER"
-@pay_request.receiverList.receiver[0].amount = 1.0
-@pay_request.receiverList.receiver[0].email  = "platfo_1255612361_per@gmail.com"
-@pay_request.returnUrl    = "http://localhost:3000/adaptive_payments/pay"
-@pay_request.fundingConstraint.allowedFundingType.fundingTypeInfo = []
-@pay_request.sender.email = "platfo_1255077030_biz@gmail.com"
+@pay = @api.build_pay({
+  :actionType => "PAY",
+  :cancelUrl => "http://localhost:3000/samples/adaptive_payments/pay",
+  :currencyCode => "USD",
+  :feesPayer => "SENDER",
+  :ipnNotificationUrl => "http://localhost:3000/samples/adaptive_payments/ipn_notify",
+  :receiverList => {
+    :receiver => [{
+      :amount => 1.0,
+      :email => "platfo_1255612361_per@gmail.com" }] },
+  :returnUrl => "http://localhost:3000/samples/adaptive_payments/pay" })
 
 # Make API call & get response
 @pay_response = @api.pay(@pay_request)
