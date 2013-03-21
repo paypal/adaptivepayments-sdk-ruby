@@ -5,7 +5,7 @@ module PayPal::SDK
   module AdaptivePayments
 
 	  # Service Version
-	  SERVICE_VERSION = "1.8.2"
+	  SERVICE_VERSION = "1.8.4"
 	  # Service Name
 	  SERVICE_NAME = "AdaptivePayments"
 
@@ -316,6 +316,25 @@ module PayPal::SDK
         object
       end
       alias_method :build_get_user_limits, :BuildGetUserLimits
+
+      # Service Call: GetPrePaymentDisclosure
+      # @param GetPrePaymentDisclosureRequest
+      # @return GetPrePaymentDisclosureResponse
+      def GetPrePaymentDisclosure(options = {} , http_header = {})
+        request_object  = BuildGetPrePaymentDisclosure(options)
+        request_hash    = request_object.to_hash
+        response_hash   = request("GetPrePaymentDisclosure", request_hash, http_header)
+        GetPrePaymentDisclosureResponse.new(response_hash)
+      end
+      alias_method :get_pre_payment_disclosure, :GetPrePaymentDisclosure
+
+      def BuildGetPrePaymentDisclosure(options = {}, &block)
+        klass     = GetPrePaymentDisclosureRequest
+        object = options.is_a?(klass) ? options : klass.new(options || {})
+        object.instance_eval(&block) if block
+        object
+      end
+      alias_method :build_get_pre_payment_disclosure, :BuildGetPrePaymentDisclosure
 
 
     end
