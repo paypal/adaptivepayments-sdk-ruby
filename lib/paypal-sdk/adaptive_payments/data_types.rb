@@ -21,6 +21,7 @@ module PayPal::SDK
         def self.load_members
           object_of :email, String
           object_of :phone, PhoneNumberType
+          object_of :accountId, String
         end
       end
 
@@ -163,6 +164,12 @@ module PayPal::SDK
 
       class ErrorSeverity < EnumType
         self.options = { 'ERROR' => 'Error', 'WARNING' => 'Warning' }
+      end
+
+
+
+      class Status < EnumType
+        self.options = { 'RTR' => 'RTR', 'NONRTR' => 'NON_RTR', 'MISSINGRECEIVERCOUNTRYINFORMATION' => 'MISSING_RECEIVER_COUNTRY_INFORMATION' }
       end
 
 
@@ -421,6 +428,7 @@ module PayPal::SDK
           object_of :invoiceId, String
           object_of :paymentType, String
           object_of :paymentSubType, String
+          object_of :accountId, String
         end
       end
 
@@ -621,12 +629,32 @@ module PayPal::SDK
 
 
 
+      # Contains information related to Post Payment Disclosure Details This contains 1.Receivers information 2.Funds Avalibility Date 
+      class PostPaymentDisclosure < DataType
+        def self.load_members
+          object_of :accountIdentifier, AccountIdentifier, :required => true
+          object_of :fundsAvailabilityDate, Date
+          object_of :fundsAvailabilityDateDisclaimerText, String
+        end
+      end
+
+
+
+      class PostPaymentDisclosureList < DataType
+        def self.load_members
+          array_of :postPaymentDisclosure, PostPaymentDisclosure, :required => true
+        end
+      end
+
+
+
       # The result of a payment execution. 
       class ExecutePaymentResponse < DataType
         def self.load_members
           object_of :responseEnvelope, ResponseEnvelope, :required => true
           object_of :paymentExecStatus, String, :required => true
           object_of :payErrorList, PayErrorList
+          object_of :postPaymentDisclosureList, PostPaymentDisclosureList
           array_of :error, ErrorData
         end
       end
@@ -797,6 +825,7 @@ module PayPal::SDK
           object_of :addressList, AddressList
           object_of :feesPayer, String
           object_of :displayMaxTotalAmount, Boolean
+          object_of :sender, SenderIdentifier
           array_of :error, ErrorData
         end
       end
@@ -827,6 +856,7 @@ module PayPal::SDK
           object_of :feesPayer, String
           object_of :displayMaxTotalAmount, Boolean
           object_of :requireInstantFundingSource, Boolean
+          object_of :sender, SenderIdentifier
         end
       end
 
@@ -980,6 +1010,107 @@ module PayPal::SDK
           object_of :responseEnvelope, ResponseEnvelope, :required => true
           array_of :userLimit, UserLimit, :required => true
           object_of :warningDataList, WarningDataList
+          array_of :error, ErrorData
+        end
+      end
+
+
+
+      # ReceiverInfo needs to be populate for the receiver who doesn't have paypal account. 
+      class ReceiverInfo < AccountIdentifier
+        def self.load_members
+          # The two-character ISO country code of the home country of the Receiver 
+          object_of :countryCode, String
+          object_of :firstName, String
+          object_of :lastName, String
+        end
+      end
+
+
+
+      # FeeDisclosure contains the information related to Fees and taxes. 
+      class FeeDisclosure < DataType
+        def self.load_members
+          object_of :fee, CurrencyType, :required => true
+          object_of :taxes, CurrencyType, :required => true
+        end
+      end
+
+
+
+      # SenderDisclosure contains the disclosure related to Sender 
+      class SenderDisclosure < DataType
+        def self.load_members
+          object_of :amountToTransfer, CurrencyType, :required => true
+          object_of :feeDisclosure, FeeDisclosure
+          object_of :totalAmountToTransfer, CurrencyType, :required => true
+        end
+      end
+
+
+
+      # This holds the conversion rate from "Sender currency for one bucks to equivalent value in the receivers currency" 
+      class ConversionRate < DataType
+        def self.load_members
+          object_of :senderCurrency, String, :required => true
+          object_of :receiverCurrency, String, :required => true
+          object_of :exchangeRate, Float, :required => true
+        end
+      end
+
+
+
+      # ReceiverDisclosure contains the disclosure related to Receiver/Receivers. 
+      class ReceiverDisclosure < DataType
+        def self.load_members
+          object_of :accountIdentifier, AccountIdentifier, :required => true
+          object_of :amountReceivedFromSender, CurrencyType, :required => true
+          # The two-character ISO country code of the home country of the Receiver 
+          object_of :countryCode, String, :required => true
+          object_of :conversionRate, ConversionRate, :required => true
+          object_of :feeDisclosure, FeeDisclosure
+          object_of :totalAmountReceived, CurrencyType, :required => true
+        end
+      end
+
+
+
+      class ReceiverDisclosureList < DataType
+        def self.load_members
+          array_of :receiverDisclosure, ReceiverDisclosure, :required => true
+        end
+      end
+
+
+
+      class ReceiverInfoList < DataType
+        def self.load_members
+          array_of :receiverInfo, ReceiverInfo, :required => true
+        end
+      end
+
+
+
+      # GetPrePaymentDisclosureRequest is used to get the PrePayment Disclosure.; GetPrePaymentDisclosureRequest contains following parameters payKey :The pay key that identifies the payment for which you want to retrieve details. this is the pay key returned in the PayResponse message. receiverInfoList : This is an optional.This needs to be provided in case of Unilateral scenario. receiverInfoList has a list of ReceiverInfo type. List is provided here to support in future for Parallel/Chained Payemnts. Each ReceiverInfo has following variables firstName : firstName of recipient.  lastName : lastName of recipient.  countryCode : CountryCode of Recipient. 
+      class GetPrePaymentDisclosureRequest < DataType
+        def self.load_members
+          object_of :requestEnvelope, RequestEnvelope, :required => true
+          object_of :payKey, String, :required => true
+          object_of :receiverInfoList, ReceiverInfoList
+        end
+      end
+
+
+
+      # GetPrePaymentDisclosureResponse contains the information related to PrePayment disclosure. status : indicates the status of response. If Status = RTR then it means that this is RTR transaction. If Status = NON_RTR then it means that this is non RTR transaction. If Status = MISSING_RECEIVER_COUNTRY_INFORMATION then it means the Receiver country information is not found in PayPal database. So merchant has to call the API again with same set of parameter along with Receiver country code.This is useful in case of Unilateral scenario. where receiver is not holding paypal account. feePayer:Indicates who has agreed to Pay a Fee for the RTR transaction. Merchant can use this information to decide who actually has to pay the fee . senderDisclosure : This Variable Holds the disclosure related to sender. receiverDisclosureList : This list contains the disclosure information related to receivers. Merchant can just parse the details what ever is avaliable in the response and display the same to user. 
+      class GetPrePaymentDisclosureResponse < DataType
+        def self.load_members
+          object_of :responseEnvelope, ResponseEnvelope, :required => true
+          object_of :status, Status, :required => true
+          object_of :feesPayer, String
+          object_of :senderDisclosure, SenderDisclosure
+          object_of :receiverDisclosureList, ReceiverDisclosureList
+          object_of :disclaimer, String
           array_of :error, ErrorData
         end
       end
