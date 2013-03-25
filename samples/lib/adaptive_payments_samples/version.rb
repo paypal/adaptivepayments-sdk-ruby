@@ -1,3 +1,3 @@
 module AdaptivePaymentsSamples
-  VERSION = "1.96.2"
+  VERSION = "1.100.0"
 end
