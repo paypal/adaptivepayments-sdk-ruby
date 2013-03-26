@@ -1,3 +1,9 @@
+Version 1.100.0 - March 25, 2013
+ 
+	- Updated stubs for 100 release.
+		
+You can see source code of this release in github under https://github.com/paypal/adaptivepayments-sdk-ruby/tree/v1.100.0.
+--------------------------------------------------------------------------------------------------
 Version 1.96.3 - March 12, 2013
 
   - Update paypal-sdk-core version to '~> 0.2.0'
