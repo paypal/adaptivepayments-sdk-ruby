@@ -108,6 +108,8 @@ require 'paypal-sdk-adaptivepayments'
 @pay_response.responseEnvelope.ack
 ```
 
+For more samples [https://paypal-sdk-samples.herokuapp.com/adaptive_payments/](https://paypal-sdk-samples.herokuapp.com/adaptive_payments/)
+
 ## Samples App
 
 Add following line in rails `Gemfile`:
@@ -130,4 +132,5 @@ rails g paypal:sdk:install
 ```
 
 Run `rails server` and check the samples.
+
 
