@@ -1,16 +1,20 @@
 module CheckSample
 
   def get_response_value(key)
-    if find(:id, 'response').text =~ /#{key}: ([^\s]*)/
+    if find(:id, 'response').text =~ /:#{key} => "?([^\s,"]*)"?/
       $1.dup
     end
+  end
+
+  def page_should_have_success
+    page.should have_content(':ack => "Success"')
   end
 
   def check_sample(name, &block)
     first(:link, name).click
     self.instance_eval(&block) if block
     click_button "Submit"
-    page.should have_content("ack: Success")
+    page_should_have_success
   end
 
   def self.included(klass)

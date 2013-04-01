@@ -1,11 +1,7 @@
 %div#response
   %p
     %b Ruby Code:
-    = CodeRay.scan(generate_code(request, response), "ruby").div.html_safe
-  %p
-    %b Request:
-    = CodeRay.scan(request.to_hash(:symbol => false).to_yaml, "yaml").div.html_safe
+    = find_and_preserve CodeRay.scan(generate_code(request, response), "ruby").div.html_safe
   %p
     %b Response:
-    = CodeRay.scan(response.to_hash(:symbol => false).to_yaml, "yaml").div.html_safe
-
+    = find_and_preserve CodeRay.scan(format_hash(response.to_hash(:attribute => false, :namespace => false)), "ruby").div.html_safe
