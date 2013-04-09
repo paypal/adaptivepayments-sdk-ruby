@@ -14,6 +14,22 @@ module PayPal::SDK
         end
       end
 
+      module ResponseStatus
+        Status = { :success => ["Success", "SuccessWithWarning"],
+                   :warning => ["Warning", "SuccessWithWarning", "FailureWithWarning"],
+                   :failure => ["Failure", "FailureWithWarning"] }
+
+        def response_status
+          self.responseEnvelope && self.responseEnvelope.ack
+        end
+
+        Status.keys.each do |status|
+          define_method("#{status}?") do
+            Status[status].include?(self.response_status)
+          end
+        end
+      end
+
       class EnumType < Core::API::DataTypes::Enum
       end
 
@@ -94,6 +110,7 @@ module PayPal::SDK
       # This specifies a fault, encapsulating error data, with specific error codes. 
       class FaultMessage < DataType
         def self.load_members
+          include ResponseStatus
           object_of :responseEnvelope, ResponseEnvelope, :required => true
           array_of :error, ErrorData
         end
@@ -562,6 +579,7 @@ module PayPal::SDK
       # The result of the CancelPreapprovalRequest. 
       class CancelPreapprovalResponse < DataType
         def self.load_members
+          include ResponseStatus
           object_of :responseEnvelope, ResponseEnvelope, :required => true
           array_of :error, ErrorData
         end
@@ -584,6 +602,7 @@ module PayPal::SDK
       # The result of the ConfirmPreapprovalRequest. 
       class ConfirmPreapprovalResponse < DataType
         def self.load_members
+          include ResponseStatus
           object_of :responseEnvelope, ResponseEnvelope, :required => true
           array_of :error, ErrorData
         end
@@ -608,6 +627,7 @@ module PayPal::SDK
       # A response that contains a table of estimated converted currencies based on the Convert Currency Request. 
       class ConvertCurrencyResponse < DataType
         def self.load_members
+          include ResponseStatus
           object_of :responseEnvelope, ResponseEnvelope, :required => true
           object_of :estimatedAmountTable, CurrencyConversionTable, :required => true
           array_of :error, ErrorData
@@ -651,6 +671,7 @@ module PayPal::SDK
       # The result of a payment execution. 
       class ExecutePaymentResponse < DataType
         def self.load_members
+          include ResponseStatus
           object_of :responseEnvelope, ResponseEnvelope, :required => true
           object_of :paymentExecStatus, String, :required => true
           object_of :payErrorList, PayErrorList
@@ -674,6 +695,7 @@ module PayPal::SDK
       # The response to get the backup funding sources available for a preapproval. 
       class GetAllowedFundingSourcesResponse < DataType
         def self.load_members
+          include ResponseStatus
           object_of :responseEnvelope, ResponseEnvelope, :required => true
           array_of :fundingSource, FundingSource
           array_of :error, ErrorData
@@ -695,6 +717,7 @@ module PayPal::SDK
       # The response message for the GetPaymentOption request 
       class GetPaymentOptionsResponse < DataType
         def self.load_members
+          include ResponseStatus
           object_of :responseEnvelope, ResponseEnvelope, :required => true
           object_of :initiatingEntity, InitiatingEntity
           object_of :displayOptions, DisplayOptions
@@ -722,6 +745,7 @@ module PayPal::SDK
       # The details of the PayRequest as specified in the Pay operation. 
       class PaymentDetailsResponse < DataType
         def self.load_members
+          include ResponseStatus
           object_of :responseEnvelope, ResponseEnvelope, :required => true
           object_of :cancelUrl, String, :required => true
           object_of :currencyCode, String, :required => true
@@ -773,6 +797,7 @@ module PayPal::SDK
       # The PayResponse contains the result of the Pay operation. The payKey and execution status of the request should always be provided. 
       class PayResponse < DataType
         def self.load_members
+          include ResponseStatus
           object_of :responseEnvelope, ResponseEnvelope, :required => true
           object_of :payKey, String, :required => true
           object_of :paymentExecStatus, String, :required => true
@@ -799,6 +824,7 @@ module PayPal::SDK
       # The details of the Preapproval as specified in the Preapproval operation. 
       class PreapprovalDetailsResponse < DataType
         def self.load_members
+          include ResponseStatus
           object_of :responseEnvelope, ResponseEnvelope, :required => true
           object_of :approved, Boolean, :required => true
           object_of :cancelUrl, String, :required => true
@@ -865,6 +891,7 @@ module PayPal::SDK
       # The result of the PreapprovalRequest is a preapprovalKey. 
       class PreapprovalResponse < DataType
         def self.load_members
+          include ResponseStatus
           object_of :responseEnvelope, ResponseEnvelope, :required => true
           object_of :preapprovalKey, String, :required => true
           array_of :error, ErrorData
@@ -890,6 +917,7 @@ module PayPal::SDK
       # The result of a Refund request. 
       class RefundResponse < DataType
         def self.load_members
+          include ResponseStatus
           object_of :responseEnvelope, ResponseEnvelope, :required => true
           object_of :currencyCode, String, :required => true
           object_of :refundInfoList, RefundInfoList, :required => true
@@ -917,6 +945,7 @@ module PayPal::SDK
       # The response message for the SetPaymentOption request 
       class SetPaymentOptionsResponse < DataType
         def self.load_members
+          include ResponseStatus
           object_of :responseEnvelope, ResponseEnvelope, :required => true
           array_of :error, ErrorData
         end
@@ -937,6 +966,7 @@ module PayPal::SDK
       # The response to get the funding plans available for a payment. 
       class GetFundingPlansResponse < DataType
         def self.load_members
+          include ResponseStatus
           object_of :responseEnvelope, ResponseEnvelope, :required => true
           array_of :fundingPlan, FundingPlan
           array_of :error, ErrorData
@@ -959,6 +989,7 @@ module PayPal::SDK
       # The response to get the shipping addresses available for a payment. 
       class GetAvailableShippingAddressesResponse < DataType
         def self.load_members
+          include ResponseStatus
           object_of :responseEnvelope, ResponseEnvelope, :required => true
           array_of :availableAddress, Address
           array_of :error, ErrorData
@@ -981,6 +1012,7 @@ module PayPal::SDK
       # The response to get the shipping addresses available for a payment. 
       class GetShippingAddressesResponse < DataType
         def self.load_members
+          include ResponseStatus
           object_of :responseEnvelope, ResponseEnvelope, :required => true
           object_of :selectedAddress, Address
           array_of :error, ErrorData
@@ -1007,6 +1039,7 @@ module PayPal::SDK
       # A response that contains a list of remaining limits 
       class GetUserLimitsResponse < DataType
         def self.load_members
+          include ResponseStatus
           object_of :responseEnvelope, ResponseEnvelope, :required => true
           array_of :userLimit, UserLimit, :required => true
           object_of :warningDataList, WarningDataList
@@ -1105,6 +1138,7 @@ module PayPal::SDK
       # GetPrePaymentDisclosureResponse contains the information related to PrePayment disclosure. status : indicates the status of response. If Status = RTR then it means that this is RTR transaction. If Status = NON_RTR then it means that this is non RTR transaction. If Status = MISSING_RECEIVER_COUNTRY_INFORMATION then it means the Receiver country information is not found in PayPal database. So merchant has to call the API again with same set of parameter along with Receiver country code.This is useful in case of Unilateral scenario. where receiver is not holding paypal account. feePayer:Indicates who has agreed to Pay a Fee for the RTR transaction. Merchant can use this information to decide who actually has to pay the fee . senderDisclosure : This Variable Holds the disclosure related to sender. receiverDisclosureList : This list contains the disclosure information related to receivers. Merchant can just parse the details what ever is avaliable in the response and display the same to user. 
       class GetPrePaymentDisclosureResponse < DataType
         def self.load_members
+          include ResponseStatus
           object_of :responseEnvelope, ResponseEnvelope, :required => true
           object_of :status, Status, :required => true
           object_of :feesPayer, String
