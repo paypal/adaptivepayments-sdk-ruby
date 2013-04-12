@@ -8,6 +8,8 @@ require 'paypal-sdk-<%= service_name.gsub("_", "") %>'
 @<%= service_action %>_response = @api.<%= service_action %>(@<%= service_action %>)
 
 # Access Response
-<% response_hash.each do |key, value| -%>
-@<%= service_action %>_response.<%= key %>
-<% end -%>
+if @<%= service_action %>_response.success?
+  print @<%= service_action %>_response.inspect
+else
+  print @<%= service_action %>_response.error[0].message
+end
