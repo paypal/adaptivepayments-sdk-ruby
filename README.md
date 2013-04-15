@@ -106,9 +106,9 @@ require 'paypal-sdk-adaptivepayments'
 
 # Access response
 if @pay_response.success?
-  print @pay_response.payKey
+  @pay_response.payKey
 else
-  print @pay_response.error[0].message
+  @pay_response.error[0].message
 end
 ```
 
