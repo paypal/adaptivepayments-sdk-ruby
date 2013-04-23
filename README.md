@@ -107,6 +107,7 @@ require 'paypal-sdk-adaptivepayments'
 # Access response
 if @pay_response.success?
   @pay_response.payKey
+  @api.payment_url(@pay_response)  # Url to complete payment
 else
   @pay_response.error[0].message
 end

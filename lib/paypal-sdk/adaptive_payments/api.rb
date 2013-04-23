@@ -5,6 +5,7 @@ module PayPal
     module AdaptivePayments
       class API < Core::API::Platform
         include Services
+        include Urls
 
         def initialize(environment = nil, options = {})
           super(SERVICE_NAME, environment, options)
