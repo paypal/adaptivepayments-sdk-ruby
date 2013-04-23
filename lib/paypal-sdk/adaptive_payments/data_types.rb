@@ -802,6 +802,8 @@ module PayPal::SDK
           object_of :payKey, String, :required => true
           object_of :paymentExecStatus, String, :required => true
           object_of :payErrorList, PayErrorList
+          object_of :paymentInfoList, PaymentInfoList, :required => true
+          object_of :sender, SenderIdentifier
           object_of :defaultFundingPlan, FundingPlan
           object_of :warningDataList, WarningDataList
           array_of :error, ErrorData
