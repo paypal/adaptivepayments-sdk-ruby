@@ -15,6 +15,11 @@ module PayPal
         def default_http_header
           super.merge(ADAPTIVE_PAYMENTS_HTTP_HEADER)
         end
+
+        # Validate IPN message
+        def ipn_valid?(raw_post_data)
+          Core::API::IPN.valid?(raw_post_data, config)
+        end
       end
     end
   end

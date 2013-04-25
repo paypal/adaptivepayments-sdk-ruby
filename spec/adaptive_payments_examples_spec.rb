@@ -111,5 +111,9 @@ describe "AdaptivePayments" do
       @convert_currency_response.should be_success
     end
 
+    it "Validate ipn message" do
+      @api.ipn_valid?("Invalid").should be_false
+    end
+
   end
 end
