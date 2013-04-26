@@ -105,7 +105,12 @@ require 'paypal-sdk-adaptivepayments'
 @pay_response = @api.pay(@pay)
 
 # Access response
-@pay_response.responseEnvelope.ack
+if @pay_response.success?
+  @pay_response.payKey
+  @api.payment_url(@pay_response)  # Url to complete payment
+else
+  @pay_response.error[0].message
+end
 ```
 
 For more samples [https://paypal-sdk-samples.herokuapp.com/adaptive_payments/](https://paypal-sdk-samples.herokuapp.com/adaptive_payments/)

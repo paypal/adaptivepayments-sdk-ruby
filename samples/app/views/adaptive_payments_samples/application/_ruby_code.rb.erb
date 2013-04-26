@@ -8,6 +8,12 @@ require 'paypal-sdk-<%= service_name.gsub("_", "") %>'
 @<%= service_action %>_response = @api.<%= service_action %>(@<%= service_action %>)
 
 # Access Response
-<% response_hash.each do |key, value| -%>
-@<%= service_action %>_response.<%= key %>
+if @<%= service_action %>_response.success?
+<% api_response.members.keys.each do |name| -%>
+  <% unless [:xmlns, :type, :responseEnvelope, :error].include? name -%>
+  @<%= service_action %>_response.<%= name %>
+  <% end %>
 <% end -%>
+else
+  @<%= service_action %>_response.error
+end
