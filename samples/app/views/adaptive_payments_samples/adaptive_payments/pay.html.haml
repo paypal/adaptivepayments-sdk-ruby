@@ -11,7 +11,7 @@
           = aft.association :fundingTypeInfo do |fti|
             = fti.input :fundingType, :as => :select, :collection => [ "ECHECK", "BALANCE", "CREDITCARD" ]
       = f.input :currencyCode
-      = f.input :feesPayer,  :as => :select, :collection => [ "SENDER", "EACHRECIVER", "PRIMARYRECIVER", "SECONDARYONLY"]
+      = f.input :feesPayer,  :as => :select, :collection => [ "SENDER", "EACHRECEIVER", "PRIMARYRECEIVER", "SECONDARYONLY"]
       = f.input :ipnNotificationUrl
       = f.input :memo
       = f.input :pin
