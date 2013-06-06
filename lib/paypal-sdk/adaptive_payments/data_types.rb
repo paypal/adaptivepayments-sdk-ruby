@@ -357,6 +357,7 @@ module PayPal::SDK
           object_of :firstName, String, :required => true
           # The last (family) name of the end consumer as known by the institution. 
           object_of :lastName, String, :required => true
+          object_of :middleName, String
           # The full name of the end consumer as known by the institution. 
           object_of :displayName, String, :required => true
           # The unique identifier as assigned to the end consumer by the institution. 
@@ -364,6 +365,8 @@ module PayPal::SDK
           # The two-character ISO country code of the home country of the end consumer 
           object_of :countryCode, String, :required => true
           object_of :email, String
+          object_of :dateOfBirth, Date
+          object_of :address, BaseAddress
         end
       end
 
