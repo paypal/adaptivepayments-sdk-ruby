@@ -63,13 +63,13 @@ production:
 Load Configurations from specified file:
 
 ```ruby
-PayPal::SDK::Core::Config.load('config/paypal.yml',  ENV['RACK_ENV'] || 'development')
+PayPal::SDK.load('config/paypal.yml',  ENV['RACK_ENV'] || 'development')
 ```
 
 Or without configuration file:
 
 ```ruby
-@api = PayPal::SDK::AdaptivePayments::API.new(
+PayPal::SDK.configure(
   :mode      => "sandbox",  # Set "live" for production
   :app_id    => "APP-80W284485P519543T",
   :username  => "jb-us-seller_api1.paypal.com",
@@ -81,12 +81,14 @@ Or without configuration file:
 
 ```ruby
 require 'paypal-sdk-adaptivepayments'
-@api = PayPal::SDK::AdaptivePayments::API.new(
+PayPal::SDK.configure(
   :mode      => "sandbox",  # Set "live" for production
   :app_id    => "APP-80W284485P519543T",
   :username  => "jb-us-seller_api1.paypal.com",
   :password  => "WX4WTU3S8MY44S7F",
   :signature => "AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy" )
+
+@api = PayPal::SDK::AdaptivePayments.new
 
 # Build request object
 @pay = @api.build_pay({
@@ -102,14 +104,14 @@ require 'paypal-sdk-adaptivepayments'
   :returnUrl => "http://localhost:3000/samples/adaptive_payments/pay" })
 
 # Make API call & get response
-@pay_response = @api.pay(@pay)
+@response = @api.pay(@pay)
 
 # Access response
-if @pay_response.success?
-  @pay_response.payKey
-  @api.payment_url(@pay_response)  # Url to complete payment
+if @response.success?
+  @response.payKey
+  @api.payment_url(@response)  # Url to complete payment
 else
-  @pay_response.error[0].message
+  @response.error[0].message
 end
 ```
 
@@ -137,5 +139,3 @@ rails g paypal:sdk:install
 ```
 
 Run `rails server` and check the samples.
-
-
