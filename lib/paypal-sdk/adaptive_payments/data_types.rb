@@ -191,6 +191,18 @@ module PayPal::SDK
 
 
 
+      class AgreementType < EnumType
+        self.options = { 'OFFLINE' => 'OFFLINE', 'ONLINE' => 'ONLINE' }
+      end
+
+
+
+      class PhoneType < EnumType
+        self.options = { 'NONE' => 'NONE', 'HOME' => 'HOME', 'WORK' => 'WORK', 'BUSINESS' => 'BUSINESS', 'MOBILE' => 'MOBILE', 'FAXHOME' => 'FAX_HOME', 'FAXBUSINESS' => 'FAX_BUSINESS' }
+      end
+
+
+
       class Address < DataType
         def self.load_members
           object_of :addresseeName, String
@@ -278,6 +290,22 @@ module PayPal::SDK
       class FundingTypeInfo < DataType
         def self.load_members
           object_of :fundingType, String, :required => true
+        end
+      end
+
+
+
+      # ShippingAddressInfo. 
+      class ShippingAddressInfo < DataType
+        def self.load_members
+          object_of :addresseeName, String
+          object_of :street1, String
+          object_of :street2, String
+          object_of :city, String
+          object_of :state, String
+          object_of :zip, String
+          object_of :country, String
+          array_of :phone, PhoneNumber
         end
       end
 
@@ -514,7 +542,10 @@ module PayPal::SDK
         def self.load_members
           # Require the user to select a shipping address during the web flow. 
           object_of :requireShippingAddressSelection, Boolean
+          # Determines whether or not the UI pages should display the shipping address set by user in this SetPaymentOptions request. 
+          object_of :addressOverride, Boolean
           object_of :referrerCode, String
+          object_of :shippingAddress, ShippingAddressInfo
         end
       end
 
@@ -597,6 +628,7 @@ module PayPal::SDK
           object_of :preapprovalKey, String, :required => true
           object_of :fundingSourceId, String
           object_of :pin, String
+          object_of :agreementType, AgreementType
         end
       end
 
@@ -766,6 +798,8 @@ module PayPal::SDK
           object_of :preapprovalKey, String
           object_of :fundingConstraint, FundingConstraint
           object_of :sender, SenderIdentifier
+          object_of :shippingAddress, ShippingAddressInfo
+          object_of :payKeyExpirationDate, DateTime
           array_of :error, ErrorData
         end
       end
@@ -792,6 +826,8 @@ module PayPal::SDK
           object_of :trackingId, String
           object_of :fundingConstraint, FundingConstraint
           object_of :sender, SenderIdentifier
+          # The pay key expires after the duration specified in this column. If not provided, it defaults to normal expiration behavior. Valid values are 5 minutes to 30 days. 
+          object_of :payKeyDuration, String
         end
       end
 
@@ -857,6 +893,7 @@ module PayPal::SDK
           object_of :feesPayer, String
           object_of :displayMaxTotalAmount, Boolean
           object_of :sender, SenderIdentifier
+          object_of :agreementType, AgreementType
           array_of :error, ErrorData
         end
       end
@@ -927,6 +964,15 @@ module PayPal::SDK
           object_of :currencyCode, String, :required => true
           object_of :refundInfoList, RefundInfoList, :required => true
           array_of :error, ErrorData
+        end
+      end
+
+
+
+      # Phone number with Type of phone number 
+      class PhoneNumber < PhoneNumberType
+        def self.load_members
+          object_of :type, PhoneType, :required => true
         end
       end
 

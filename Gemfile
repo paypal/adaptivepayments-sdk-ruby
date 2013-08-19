@@ -15,3 +15,5 @@ end
 group :test do
   gem 'rspec'
 end
+
+gem 'nokogiri', '~> 1.5.9', :platform => :mri_18
