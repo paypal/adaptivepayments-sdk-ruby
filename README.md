@@ -107,7 +107,7 @@ PayPal::SDK.configure(
 @response = @api.pay(@pay)
 
 # Access response
-if @response.success?
+if @response.success? && @response.payment_exec_status != "ERROR"
   @response.payKey
   @api.payment_url(@response)  # Url to complete payment
 else
