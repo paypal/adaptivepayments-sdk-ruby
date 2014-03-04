@@ -186,7 +186,7 @@ module PayPal::SDK
 
 
       class Status < EnumType
-        self.options = { 'RTR' => 'RTR', 'NONRTR' => 'NON_RTR', 'MISSINGRECEIVERCOUNTRYINFORMATION' => 'MISSING_RECEIVER_COUNTRY_INFORMATION' }
+        self.options = { 'RTR' => 'RTR', 'NONRTR' => 'NON_RTR', 'MISSINGRECEIVERCOUNTRYINFORMATION' => 'MISSING_RECEIVER_COUNTRY_INFORMATION', 'MISSINGRECEIVERCOUNTRYFNAMELNAMEINFORMATION' => 'MISSING_RECEIVER_COUNTRY_FNAME_LNAME_INFORMATION' }
       end
 
 
@@ -1128,6 +1128,7 @@ module PayPal::SDK
           object_of :amountToTransfer, CurrencyType, :required => true
           object_of :feeDisclosure, FeeDisclosure
           object_of :totalAmountToTransfer, CurrencyType, :required => true
+          object_of :conversionRate, ConversionRate, :required => true
         end
       end
 
@@ -1186,7 +1187,7 @@ module PayPal::SDK
 
 
 
-      # GetPrePaymentDisclosureResponse contains the information related to PrePayment disclosure. status : indicates the status of response. If Status = RTR then it means that this is RTR transaction. If Status = NON_RTR then it means that this is non RTR transaction. If Status = MISSING_RECEIVER_COUNTRY_INFORMATION then it means the Receiver country information is not found in PayPal database. So merchant has to call the API again with same set of parameter along with Receiver country code.This is useful in case of Unilateral scenario. where receiver is not holding paypal account. feePayer:Indicates who has agreed to Pay a Fee for the RTR transaction. Merchant can use this information to decide who actually has to pay the fee . senderDisclosure : This Variable Holds the disclosure related to sender. receiverDisclosureList : This list contains the disclosure information related to receivers. Merchant can just parse the details what ever is avaliable in the response and display the same to user. 
+      # GetPrePaymentDisclosureResponse contains the information related to PrePayment disclosure. status : indicates the status of response. If Status = RTR then it means that this is RTR transaction. If Status = NON_RTR then it means that this is non RTR transaction. If Status = MISSING_RECEIVER_COUNTRY_INFORMATION then it means the Receiver country information is not found in PayPal database. So merchant has to call the API again with same set of parameter along with Receiver country code.This is useful in case of Unilateral scenario. where receiver is not holding paypal account. This is currently a place holder to support backward compatibility since first name and last name are mandated too. If Status = MISSING_RECEIVER_COUNTRY_FNAME_LNAME_INFORMATION then it means the Receiver country, first name and last name information is not found in PayPal database. So merchant has to call the API again with same set of parameter along with Receiver country code.This is useful in case of Unilateral scenario. where receiver is not holding paypal account. feePayer:Indicates who has agreed to Pay a Fee for the RTR transaction. Merchant can use this information to decide who actually has to pay the fee . senderDisclosure : This Variable Holds the disclosure related to sender. receiverDisclosureList : This list contains the disclosure information related to receivers. Merchant can just parse the details what ever is avaliable in the response and display the same to user. 
       class GetPrePaymentDisclosureResponse < DataType
         def self.load_members
           include ResponseStatus
