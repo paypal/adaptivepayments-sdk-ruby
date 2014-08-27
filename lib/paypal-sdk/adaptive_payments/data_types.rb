@@ -186,7 +186,7 @@ module PayPal::SDK
 
 
       class Status < EnumType
-        self.options = { 'RTR' => 'RTR', 'NONRTR' => 'NON_RTR', 'MISSINGRECEIVERCOUNTRYINFORMATION' => 'MISSING_RECEIVER_COUNTRY_INFORMATION', 'MISSINGRECEIVERCOUNTRYFNAMELNAMEINFORMATION' => 'MISSING_RECEIVER_COUNTRY_FNAME_LNAME_INFORMATION' }
+        self.options = { 'RTR' => 'RTR', 'NONRTR' => 'NON_RTR', 'MISSINGRECEIVERCOUNTRYINFORMATION' => 'MISSING_RECEIVER_COUNTRY_INFORMATION' }
       end
 
 
@@ -684,12 +684,24 @@ module PayPal::SDK
 
 
 
-      # Contains information related to Post Payment Disclosure Details This contains 1.Receivers information 2.Funds Avalibility Date 
+      # Contains information related to State Regulatory Agency Information of the Sender's country for RTR transaction This contains 1.Agency Name 2.Phone Number 3.Website 
+      class StateRegulatoryAgencyInfo < DataType
+        def self.load_members
+          object_of :Name, String
+          object_of :PhoneNo, String
+          object_of :Website, String
+        end
+      end
+
+
+
+      # Contains information related to Post Payment Disclosure Details This contains 1.Receivers information 2.Funds Avalibility Date 3.State Regulatory Agency Information 
       class PostPaymentDisclosure < DataType
         def self.load_members
           object_of :accountIdentifier, AccountIdentifier, :required => true
           object_of :fundsAvailabilityDate, Date
           object_of :fundsAvailabilityDateDisclaimerText, String
+          object_of :stateRegulatoryAgencyInfo, StateRegulatoryAgencyInfo
         end
       end
 
@@ -1187,7 +1199,7 @@ module PayPal::SDK
 
 
 
-      # GetPrePaymentDisclosureResponse contains the information related to PrePayment disclosure. status : indicates the status of response. If Status = RTR then it means that this is RTR transaction. If Status = NON_RTR then it means that this is non RTR transaction. If Status = MISSING_RECEIVER_COUNTRY_INFORMATION then it means the Receiver country information is not found in PayPal database. So merchant has to call the API again with same set of parameter along with Receiver country code.This is useful in case of Unilateral scenario. where receiver is not holding paypal account. This is currently a place holder to support backward compatibility since first name and last name are mandated too. If Status = MISSING_RECEIVER_COUNTRY_FNAME_LNAME_INFORMATION then it means the Receiver country, first name and last name information is not found in PayPal database. So merchant has to call the API again with same set of parameter along with Receiver country code.This is useful in case of Unilateral scenario. where receiver is not holding paypal account. feePayer:Indicates who has agreed to Pay a Fee for the RTR transaction. Merchant can use this information to decide who actually has to pay the fee . senderDisclosure : This Variable Holds the disclosure related to sender. receiverDisclosureList : This list contains the disclosure information related to receivers. Merchant can just parse the details what ever is avaliable in the response and display the same to user. 
+      # GetPrePaymentDisclosureResponse contains the information related to PrePayment disclosure. status : indicates the status of response. If Status = RTR then it means that this is RTR transaction. If Status = NON_RTR then it means that this is non RTR transaction. If Status = MISSING_RECEIVER_COUNTRY_INFORMATION then it means the Receiver country information is not found in PayPal database. So merchant has to call the API again with same set of parameter along with Receiver country code.This is useful in case of Unilateral scenario. where receiver is not holding paypal account. This is currently a place holder to support backward compatibility since first name and last name are mandated too. feePayer:Indicates who has agreed to Pay a Fee for the RTR transaction. Merchant can use this information to decide who actually has to pay the fee . senderDisclosure : This Variable Holds the disclosure related to sender. receiverDisclosureList : This list contains the disclosure information related to receivers. Merchant can just parse the details what ever is avaliable in the response and display the same to user. 
       class GetPrePaymentDisclosureResponse < DataType
         def self.load_members
           include ResponseStatus
