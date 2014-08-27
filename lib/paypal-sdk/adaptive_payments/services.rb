@@ -5,7 +5,7 @@ module PayPal::SDK
   module AdaptivePayments
 
 	  # Service Version
-	  SERVICE_VERSION = "1.8.6"
+	  SERVICE_VERSION = "1.8.7"
 	  # Service Name
 	  SERVICE_NAME = "AdaptivePayments"
 
