@@ -76,7 +76,7 @@ module PayPal::SDK
       class CurrencyType < DataType
         def self.load_members
           object_of :code, String, :required => true
-          object_of :amount, Float, :required => true
+          object_of :amount, String, :required => true
         end
       end
 

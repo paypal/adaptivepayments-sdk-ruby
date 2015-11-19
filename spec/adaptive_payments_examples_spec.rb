@@ -102,7 +102,7 @@ describe "AdaptivePayments" do
         :baseAmountList => {
           :currency => [{
             :code => "USD",
-            :amount => 2.0 }] },
+            :amount => "2.0" }] },
         :convertToCurrencyList => {
           :currencyCode => ["GBP"] } })
 
