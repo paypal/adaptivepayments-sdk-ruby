@@ -1,6 +1,8 @@
 # Adaptive Payments SDK
 
-The PayPal Adaptive Payments SDK provides Ruby APIs to create, process and manage simple and complex (parallel and chained) payments, and pre-approvals using the Adaptive Payments API.
+#### Adaptive Payments moving to limited release
+
+> **Important**: Adaptive Payments is now a limited release product. It is restricted to select partners for approved use cases and should not be used for new integrations without guidance from PayPal.
 
 ## Installation
 
