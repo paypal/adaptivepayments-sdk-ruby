@@ -1,4 +1,4 @@
-# Adaptive Payments SDK
+# PayPal Ruby Adaptive Payments SDK
 
 #### Adaptive Payments moving to limited release
 
