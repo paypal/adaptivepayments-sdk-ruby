@@ -3,11 +3,12 @@ module PayPal
     module AdaptivePayments
       module Urls
         REDIRECT_ENDPOINTS = {
-          :live => "https://www.paypal.com/webscr",
-          :sandbox => "https://www.sandbox.paypal.com/webscr" }
+          :live => "https://www.paypal.com",
+          :sandbox => "https://www.sandbox.paypal.com" }
 
         def redirect_url(params = {})
-          "#{REDIRECT_ENDPOINTS[api_mode]}?#{encode_www_form(params)}"
+          locale = defined?(I18n) && "/#{I18n.locale}"
+          "#{REDIRECT_ENDPOINTS[api_mode]}#{locale}/webscr?#{encode_www_form(params)}"
         end
 
         def payment_url(key)
