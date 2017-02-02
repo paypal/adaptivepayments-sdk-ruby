@@ -117,8 +117,6 @@ else
 end
 ```
 
-For more samples [https://paypal-sdk-samples.herokuapp.com/adaptive_payments/](https://paypal-sdk-samples.herokuapp.com/adaptive_payments/)
-
 ## Samples App
 
 Add following line in rails `Gemfile`:
