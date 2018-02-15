@@ -4,6 +4,10 @@
 
 > **Important**: Adaptive Payments is now a limited release product. It is restricted to select partners for approved use cases and should not be used for new integrations without guidance from PayPal.
 
+## Support
+
+> Please contact [PayPal Technical Support](https://developer.paypal.com/support/) for any live or account issues.
+
 ## Installation
 
 Add this line to your application's Gemfile:
