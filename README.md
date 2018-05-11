@@ -40,9 +40,9 @@ For other ruby application, create a configuration file(`config/paypal.yml`):
 
 ```yaml
 development: &default
-  username: jb-us-seller_api1.paypal.com
-  password: WX4WTU3S8MY44S7F
-  signature: AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy
+  username: USERNAME
+  password: PASSWORD
+  signature: SIGNATURE
   app_id: APP-80W284485P519543T
   http_timeout: 30
   mode: sandbox
@@ -50,8 +50,8 @@ development: &default
   # # with certificate
   # cert_path: "config/cert_key.pem"
   # # with token authentication
-  # token: ESTy2hio5WJQo1iixkH29I53RJxaS0Gvno1A6.YQXZgktxbY4I2Tdg
-  # token_secret: ZKPhUYuwJwYsfWdzorozWO2U9pI
+  # token: TOKEN_AUTHENTICATION
+  # token_secret: TOKEN_SECRET
   # # with Proxy
   # http_proxy: http://proxy-ipaddress:3129/
   # # with device ip address
@@ -78,9 +78,9 @@ Or without configuration file:
 PayPal::SDK.configure(
   :mode      => "sandbox",  # Set "live" for production
   :app_id    => "APP-80W284485P519543T",
-  :username  => "jb-us-seller_api1.paypal.com",
-  :password  => "WX4WTU3S8MY44S7F",
-  :signature => "AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy" )
+  :username  => "Replace with API username",
+  :password  => "Replace with API password",
+  :signature => "Replace with API signature" )
 ```
 
 ## Example
@@ -90,9 +90,9 @@ require 'paypal-sdk-adaptivepayments'
 PayPal::SDK.configure(
   :mode      => "sandbox",  # Set "live" for production
   :app_id    => "APP-80W284485P519543T",
-  :username  => "jb-us-seller_api1.paypal.com",
-  :password  => "WX4WTU3S8MY44S7F",
-  :signature => "AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy" )
+  :username  => "Replace with API username",
+  :password  => "Replace with API password",
+  :signature => "Replace with API signature" )
 
 @api = PayPal::SDK::AdaptivePayments.new
 
