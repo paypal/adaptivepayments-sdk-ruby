@@ -1,5 +1,7 @@
 # PayPal Ruby Adaptive Payments SDK
 
+## NOTE: THIS REPOSITORY IS DEPRECATED. CODE PUBLISHED FOR HISTORICAL PURPOSES
+
 #### Adaptive Payments moving to limited release
 
 > **Important**: Adaptive Payments is now a limited release product. It is restricted to select partners for approved use cases and should not be used for new integrations without guidance from PayPal.
